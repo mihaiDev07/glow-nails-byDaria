@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { MessageSquareText, Send, UserRound } from "lucide-react";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -13,28 +14,23 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="flex w-full animate-[cardRise_.75s_.15s_ease-out_both] flex-col gap-3" onSubmit={submit}>
-      <label className="sr-only" htmlFor="name">Nume</label>
-      <input
-        className="border border-[#d7c19e]/50 bg-[#eee0c8]/95 px-4 py-3.5 text-[#342820] outline-none transition placeholder:text-[#6d5a48] focus:border-[#d5ae70] focus:ring-2 focus:ring-[#d5ae70]/35"
-        id="name"
-        placeholder="Numele tău"
-        value={name}
-        onChange={(event) => setName(event.target.value)}
-        required
-      />
-      <label className="sr-only" htmlFor="message">Mesaj</label>
-      <textarea
-        className="resize-y border border-[#d7c19e]/50 bg-[#eee0c8]/95 px-4 py-3.5 text-[#342820] outline-none transition placeholder:text-[#6d5a48] focus:border-[#d5ae70] focus:ring-2 focus:ring-[#d5ae70]/35"
-        id="message"
-        rows={5}
-        placeholder="Mesajul tău"
-        value={message}
-        onChange={(event) => setMessage(event.target.value)}
-        required
-      />
-      <button className="mt-1 w-fit bg-[#20c968] px-6 py-3 font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#18b65a] hover:shadow-xl active:translate-y-0" type="submit">
-        Trimite prin WhatsApp
+    <form className="space-y-5 animate-[cardRise_.75s_.15s_ease-out_both]" onSubmit={submit}>
+      <div>
+        <label className="mb-2 block text-sm font-semibold" htmlFor="name">Nume</label>
+        <div className="flex items-center rounded-xl border border-[#dfcbd7] bg-white px-4 focus-within:border-[#a65e85] focus-within:ring-4 focus-within:ring-[#a65e85]/10">
+          <UserRound size={18} className="shrink-0 text-[#8b607b]" aria-hidden="true" />
+          <input className="w-full bg-transparent px-3 py-3 outline-none" id="name" value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" required />
+        </div>
+      </div>
+      <div>
+        <label className="mb-2 block text-sm font-semibold" htmlFor="message">Mesaj</label>
+        <div className="flex items-start rounded-xl border border-[#dfcbd7] bg-white px-4 focus-within:border-[#a65e85] focus-within:ring-4 focus-within:ring-[#a65e85]/10">
+          <MessageSquareText size={18} className="mt-3.5 shrink-0 text-[#8b607b]" aria-hidden="true" />
+          <textarea className="min-h-32 w-full resize-y bg-transparent px-3 py-3 outline-none" id="message" value={message} onChange={(event) => setMessage(event.target.value)} required />
+        </div>
+      </div>
+      <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 font-semibold text-white shadow-[0_10px_24px_rgba(37,211,102,.3)] transition hover:-translate-y-0.5 hover:bg-[#1fbd5b] hover:shadow-[0_14px_30px_rgba(37,211,102,.4)]" type="submit">
+        <Send size={17} aria-hidden="true" />Trimite pe WhatsApp
       </button>
     </form>
   );

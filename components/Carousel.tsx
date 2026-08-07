@@ -18,7 +18,7 @@ export default function Carousel() {
         <div className="max-w-2xl animate-[titleRise_.9s_.15s_ease-out_both] text-white">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[.32em] text-[#f3b5d2] sm:text-base">Bine ai venit</p>
           <h1 className="max-w-xl text-4xl font-semibold leading-[1.08] drop-shadow-lg sm:text-5xl lg:text-6xl">
-            Eleganța începe până la vârful degetelor
+            Eleganța se poartă pe unghii
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg">
             Manichiuri delicate, create cu grijă pentru stilul și frumusețea ta.
