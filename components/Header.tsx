@@ -84,7 +84,7 @@ export default function Header() {
               title="Administrare"
             >
               <Settings size={18} aria-hidden="true" />
-              <span className="md:sr-only">Administrare</span>
+              <span className="md:sr-only"> </span>
             </Link>
           </li>
         </ul>

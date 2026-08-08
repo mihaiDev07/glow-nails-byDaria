@@ -1,5 +1,5 @@
-import { Settings } from "lucide-react";
-import LoginForm from "./LoginForm";
+import { Settings } from 'lucide-react';
+import LoginForm from './LoginForm';
 
 export default function AdminLoginPage() {
   return (
@@ -8,8 +8,10 @@ export default function AdminLoginPage() {
         <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#704674] to-[#cf78aa] text-white shadow-lg">
           <Settings size={25} aria-hidden="true" />
         </div>
-        <h1 className="text-center text-3xl font-semibold">Administrare</h1>
-        <p className="mb-8 mt-2 text-center text-sm text-[#765d6e]">Acces privat Glow Nails Studio</p>
+        <h1 className="text-center text-3xl font-semibold">Admin</h1>
+        <p className="mb-8 mt-2 text-center text-sm text-[#765d6e]">
+          Acces privat Glow Nails Studio
+        </p>
         <LoginForm />
       </div>
     </section>
