@@ -1,7 +1,8 @@
-import Image from "next/image";
-import { ImagePlus, LogOut, Plus, Save, Trash2 } from "lucide-react";
+import { ImagePlus, LogOut, Plus } from "lucide-react";
+import AdminGalleryCard from "@/components/AdminGalleryCard";
+import AdminPriceRow from "@/components/AdminPriceRow";
 import { requireAdmin } from "@/lib/admin";
-import { addPrice, deleteGalleryImage, deletePrice, signOutAction, updatePrice, uploadGalleryImage } from "./actions";
+import { addPrice, signOutAction, uploadGalleryImage } from "./actions";
 
 export default async function AdminDashboardPage() {
   const supabase = await requireAdmin();
@@ -20,19 +21,14 @@ export default async function AdminDashboardPage() {
 
         <div className="grid gap-8 xl:grid-cols-[1.05fr_.95fr]">
           <section className="rounded-3xl border border-white bg-white/85 p-5 shadow-xl sm:p-7">
-            <div className="mb-6 flex items-center gap-3"><ImagePlus className="text-[#a65e85]" /><div><h2 className="text-2xl font-semibold">Galerie</h2><p className="text-sm text-[#765d6e]">Adaugă sau șterge fotografii.</p></div></div>
+            <div className="mb-6 flex items-center gap-3"><ImagePlus className="text-[#a65e85]" /><div><h2 className="text-2xl font-semibold">Galerie</h2><p className="text-sm text-[#765d6e]">Adaugă, editează sau șterge fotografii.</p></div></div>
             <form action={uploadGalleryImage} className="mb-7 grid gap-3 rounded-2xl bg-[#f7edf3] p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
               <div><label className="mb-1 block text-sm font-semibold" htmlFor="image">Fotografie</label><input className="w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-[#704674] file:px-3 file:py-2 file:text-white" id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp,image/gif" required /></div>
               <div><label className="mb-1 block text-sm font-semibold" htmlFor="alt_text">Descriere</label><input className="w-full rounded-lg border border-[#ddcbd6] bg-white px-3 py-2 outline-none focus:border-[#a65e85]" id="alt_text" name="alt_text" placeholder="Model roz elegant" required /></div>
               <button className="flex items-center justify-center gap-2 rounded-lg bg-[#704674] px-4 py-2 font-semibold text-white transition hover:bg-[#855477]"><Plus size={17} />Adaugă</button>
             </form>
             <div className="grid gap-4 sm:grid-cols-2">
-              {gallery?.map((item) => (
-                <article className="overflow-hidden rounded-2xl border border-[#eadce5] bg-white shadow-sm" key={item.id}>
-                  <div className="relative h-48"><Image className="object-cover" src={item.image_url} alt={item.alt_text} fill sizes="(max-width:640px) 100vw, 50vw" unoptimized={item.image_url.startsWith("http")} /></div>
-                  <div className="flex items-center justify-between gap-3 p-3"><p className="truncate text-sm">{item.alt_text}</p><form action={deleteGalleryImage}><input type="hidden" name="id" value={item.id} /><button className="rounded-lg bg-red-50 p-2 text-red-600 transition hover:bg-red-100" aria-label={`Șterge ${item.alt_text}`}><Trash2 size={17} /></button></form></div>
-                </article>
-              ))}
+              {gallery?.map((item) => <AdminGalleryCard item={item} key={item.id} />)}
             </div>
           </section>
 
@@ -44,18 +40,7 @@ export default async function AdminDashboardPage() {
               <div className="flex gap-2"><input className="min-w-0 flex-1 rounded-lg border border-[#ddcbd6] bg-white px-3 py-2" name="price" placeholder="Preț" required /><button className="rounded-lg bg-[#704674] p-2.5 text-white" aria-label="Adaugă preț"><Plus size={18} /></button></div>
             </form>
             <div className="space-y-3">
-              {prices?.map((item) => (
-                <div className="rounded-2xl border border-[#eadce5] bg-white p-3 shadow-sm" key={item.id}>
-                  <form action={updatePrice} className="grid gap-2 sm:grid-cols-[1fr_1.2fr_.7fr_auto]">
-                    <input type="hidden" name="id" value={item.id} />
-                    <input className="min-w-0 rounded-lg border border-[#eadce5] px-3 py-2 text-sm" name="category" defaultValue={item.category} required />
-                    <input className="min-w-0 rounded-lg border border-[#eadce5] px-3 py-2 text-sm" name="service" defaultValue={item.service} required />
-                    <input className="min-w-0 rounded-lg border border-[#eadce5] px-3 py-2 text-sm" name="price" defaultValue={item.price} required />
-                    <button className="flex items-center justify-center rounded-lg bg-[#704674] p-2 text-white" aria-label="Salvează modificarea"><Save size={17} /></button>
-                  </form>
-                  <form action={deletePrice} className="mt-2 text-right"><input type="hidden" name="id" value={item.id} /><button className="inline-flex items-center gap-1 text-xs font-semibold text-red-600 hover:text-red-700"><Trash2 size={14} />Șterge</button></form>
-                </div>
-              ))}
+              {prices?.map((item) => <AdminPriceRow item={item} key={item.id} />)}
             </div>
           </section>
         </div>

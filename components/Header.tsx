@@ -7,10 +7,10 @@ import { useState } from 'react';
 import { Settings } from 'lucide-react';
 
 const links = [
-  { href: '/about', label: 'Despre mine' },
   { href: '/', label: 'Acasă' },
-  { href: '/pricing', label: 'Catalog' },
+  { href: '/about', label: 'Despre mine' },
   { href: '/gallery', label: 'Galerie' },
+  { href: '/pricing', label: 'Catalog' },
   { href: '/contact', label: 'Contact' },
 ];
 
